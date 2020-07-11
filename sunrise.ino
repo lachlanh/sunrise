@@ -3,6 +3,7 @@
 #include <WiFi.h>
 #include "time.h"
 
+const char* ssid = "";
 const char* password   = "";
 
 const char* TZ = "CET-1CEST,M3.5.0,M10.5.0/3";
