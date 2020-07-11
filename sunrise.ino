@@ -1,19 +1,21 @@
+#include <Arduino.h>
 #include <FastLED.h>
 #include <WiFi.h>
 #include "time.h"
 
-const char* ssid       = "XXXX";
-const char* password   = "XXXX";
+const char* password   = "";
+
+const char* TZ = "CET-1CEST,M3.5.0,M10.5.0/3";
 
 const char* ntpServer = "europe.pool.ntp.org";
-const long  gmtOffset_sec = 3600;
-const int   daylightOffset_sec = 0;//3600;
+//const long  gmtOffset_sec = 3600;
+//const int   daylightOffset_sec = 0;//3600;
 
 
 #define LED_PIN     15
 #define NUM_LEDS    4
-#define WAKE_HOUR 7
-#define WAKE_MIN 0
+#define WAKE_HOUR 6
+#define WAKE_MIN 30
 #define SLEEP_HOUR 19
 #define SLEEP_MIN 0
 CRGB leds[NUM_LEDS];
@@ -82,7 +84,10 @@ void initTime() {
   Serial.println(" CONNECTED");
   
   //init and get the time
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+  //configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
+
+  configTzTime(TZ, ntpServer);
+
   printLocalTime();
 
   //disconnect WiFi as it's no longer needed
